@@ -1,0 +1,29 @@
+{
+  "name": "@arikajs/http",
+  "version": "0.1.0",
+  "description": "Native HTTP layer for the ArikaJS framework.",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist",
+    "prepare": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@arikajs/foundation": "file:../foundation",
+    "cookie": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/cookie": "^0.6.0",
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3"
+  },
+  "author": "Prakash Tank"
+}
