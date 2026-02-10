@@ -181,6 +181,7 @@ The `Request` object provides a clean API for interacting with the current HTTP 
 ```ts
 request.path(); // /users/1
 request.method(); // GET
+request.baseUrl(); // http://localhost:3000 (uses Host header or config.app.url)
 request.query('page'); // ?page=1
 request.header('Content-Type');
 request.all(); // combined input

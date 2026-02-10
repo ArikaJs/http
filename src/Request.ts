@@ -15,13 +15,24 @@ export class Request {
         this.app = app;
         this.req = req;
 
-        // Config-driven behavior: Trust Proxy check
-        const trustProxy = app.config().get('http.trustProxy', false);
-        const protocol = trustProxy ? (this.header('x-forwarded-proto') as string || 'http') : 'http';
-        const host = trustProxy ? (this.header('x-forwarded-host') as string || req.headers.host) : req.headers.host;
-
-        const fullUrl = `${protocol}://${host || 'localhost'}${req.url || '/'}`;
+        const fullUrl = `${this.baseUrl()}${req.url || '/'}`;
         this.searchParams = new URL(fullUrl).searchParams;
+    }
+
+    /**
+     * Get the base URL (scheme + host) of the request.
+     * Falls back to app.url config if host header is missing.
+     */
+    baseUrl(): string {
+        const trustProxy = this.app.config().get('http.trustProxy', false);
+        const protocol = trustProxy ? (this.header('x-forwarded-proto') as string || 'http') : 'http';
+        const host = trustProxy ? (this.header('x-forwarded-host') as string || this.req.headers.host) : this.req.headers.host;
+
+        if (host) {
+            return `${protocol}://${host}`;
+        }
+
+        return this.app.config().get('app.url', 'http://localhost') as string;
     }
 
     /**
@@ -121,8 +132,8 @@ export class Request {
     }
 
     /**
-   * Get an input value from route params, body, or query.
-   */
+     * Get an input value from route params, body, or query.
+     */
     input(key: string, defaultValue: any = null): any {
         // 1. Check route parameters
         if (this._params[key] !== undefined) {
@@ -136,5 +147,21 @@ export class Request {
 
         // 3. Check query string
         return this.query(key) ?? defaultValue;
+    }
+
+    /**
+     * Get the parsed body.
+     */
+    body(): any {
+        return this._body;
+    }
+
+    /**
+     * Get all input (query + body).
+     */
+    all(): any {
+        const query = Object.fromEntries(this.searchParams.entries());
+        const body = typeof this._body === 'object' && this._body !== null ? this._body : {};
+        return { ...query, ...body };
     }
 }
