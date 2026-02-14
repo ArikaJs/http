@@ -1,4 +1,5 @@
-import { Application, Kernel } from '@arikajs/foundation';
+import { Application } from './Contracts/Application';
+import { Kernel } from './Contracts/Kernel';
 import { IncomingMessage, ServerResponse } from 'node:http';
 import { Request } from './Request';
 import { Response } from './Response';

@@ -1,4 +1,4 @@
-import { Application } from '@arikajs/foundation';
+import { Application } from './Contracts/Application';
 import { IncomingMessage } from 'node:http';
 import { URL } from 'node:url';
 import * as cookie from 'cookie';

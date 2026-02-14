@@ -1,4 +1,4 @@
-import { Application } from '@arikajs/foundation';
+import { Application } from './Contracts/Application';
 import { Request } from './Request';
 import { Response } from './Response';
 import { MiddlewareHandler } from './Middleware';
