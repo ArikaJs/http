@@ -10,7 +10,8 @@ export interface Middleware {
      */
     handle(
         request: Request,
-        next: (request: Request) => Promise<Response> | Response
+        next: (request: Request) => Promise<Response> | Response,
+        response?: Response
     ): Promise<Response> | Response;
 }
 
@@ -19,4 +20,4 @@ export interface Middleware {
  */
 export type MiddlewareHandler =
     | Middleware
-    | ((request: Request, next: (request: Request) => Promise<Response> | Response) => Promise<Response> | Response);
+    | ((request: Request, next: (request: Request) => Promise<Response> | Response, response?: Response) => Promise<Response> | Response);

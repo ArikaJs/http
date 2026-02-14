@@ -8,7 +8,8 @@ export class BodyParserMiddleware implements Middleware {
      */
     async handle(
         request: Request,
-        next: (request: Request) => Promise<Response> | Response
+        next: (request: Request) => Promise<Response> | Response,
+        response?: Response
     ): Promise<Response> {
         const method = request.method();
         const contentType = request.header('content-type') as string | undefined;
