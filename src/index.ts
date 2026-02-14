@@ -5,4 +5,5 @@ export * from './Middleware';
 export * from './Pipeline';
 export * from './Router';
 export * from './Middleware/BodyParserMiddleware';
+export * from './Middleware/RequestLoggingMiddleware';
 export * from './HttpServiceProvider';
