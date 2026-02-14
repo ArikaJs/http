@@ -16,7 +16,9 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "clean": "rm -rf dist",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "test": "npx tsx --test tests/*.test.ts",
+    "test:watch": "npx tsx --test --watch tests/*.test.ts"
   },
   "files": [
     "dist"

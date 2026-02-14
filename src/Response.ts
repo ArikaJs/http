@@ -110,6 +110,20 @@ export class Response {
     }
 
     /**
+     * Get the current status code.
+     */
+    getStatusCode(): number {
+        return this._status;
+    }
+
+    /**
+     * Get all currently set headers.
+     */
+    getHeaders(): Record<string, string | number | string[]> {
+        return this._headers;
+    }
+
+    /**
      * Actually terminate the request and send to client.
      * This is called by the Kernel.
      */
