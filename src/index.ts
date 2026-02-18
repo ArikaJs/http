@@ -3,5 +3,7 @@ export * from './Response';
 export * from './Middleware';
 export * from './Middleware/BodyParserMiddleware';
 export * from './Middleware/CorsMiddleware';
+export * from './Middleware/TrimStrings';
+export * from './Middleware/ConvertEmptyStringsToNull';
 export * from './Exceptions/HttpException';
 export * from './Contracts/Application';
