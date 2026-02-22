@@ -205,41 +205,6 @@ return response
 
 ---
 
-## Project Structure (recommended)
-
-- `src/`
-  - `HttpKernel.ts` – The main HTTP entry point
-  - `Router.ts` – The route collection and dispatcher
-  - `Request.ts` – HTTP Request abstraction
-  - `Response.ts` – HTTP Response builder
-  - `Pipeline.ts` – Middleware execution engine
-  - `Middleware/` – Built-in middleware (e.g., BodyParser)
-  - `index.ts` – Public exports
-- `tests/` – Unit tests for the HTTP layer
-
----
-
-## Versioning & Stability
-
-- While in **v0.x**, the API may change between minor versions.
-- Post **v1.0**, we will follow **semver** strictly.
-- `@arikajs/http` aims to maintain a stable contract with `@arikajs/foundation`.
-
----
-
-## Contributing
-
-Contributions are welcome! Please check the issues or submit a pull request for:
-- Router optimizations
-- New built-in middleware
-- Improved Request/Response helper methods
-
----
-
-## License
-
-`@arikajs/http` is open-sourced software licensed under the **MIT license**.
-
 ## 🏗 Architecture
 
 ```text
@@ -268,3 +233,25 @@ http/
 └── README.md
 ```
 
+---
+
+## Versioning & Stability
+
+- While in **v0.x**, the API may change between minor versions.
+- Post **v1.0**, we will follow **semver** strictly.
+- `@arikajs/http` aims to maintain a stable contract with `@arikajs/foundation`.
+
+---
+
+## Contributing
+
+Contributions are welcome! Please check the issues or submit a pull request for:
+- Router optimizations
+- New built-in middleware
+- Improved Request/Response helper methods
+
+---
+
+## License
+
+`@arikajs/http` is open-sourced software licensed under the **MIT license**.
