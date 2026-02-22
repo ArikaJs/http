@@ -233,3 +233,32 @@ Contributions are welcome! Please check the issues or submit a pull request for:
 ## License
 
 `@arikajs/http` is open-sourced software licensed under the **MIT license**.
+
+## 🏗 Architecture
+
+```text
+http/
+├── src/
+│   ├── Contracts
+│   │   └── Application.ts
+│   ├── Exceptions
+│   │   └── HttpException.ts
+│   ├── Middleware
+│   │   ├── BodyParserMiddleware.ts
+│   │   ├── ConvertEmptyStringsToNull.ts
+│   │   ├── CorsMiddleware.ts
+│   │   └── TrimStrings.ts
+│   ├── HttpKernel.ts
+│   ├── HttpServiceProvider.ts
+│   ├── index.ts
+│   ├── Middleware.ts
+│   ├── Pipeline.ts
+│   ├── Request.ts
+│   ├── Response.ts
+│   └── Router.ts
+├── tests/
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
