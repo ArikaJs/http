@@ -27,7 +27,9 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
-    "cookie": "^1.1.1"
+    "@types/serve-static": "^2.2.0",
+    "cookie": "^1.1.1",
+    "serve-static": "^2.2.1"
   },
   "devDependencies": {
     "@types/cookie": "^0.6.0",

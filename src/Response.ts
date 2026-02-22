@@ -77,7 +77,10 @@ export class Response {
     /**
      * Set the response content as JSON.
      */
-    json(data: any): this {
+    json(data: any, status?: number): this {
+        if (status) {
+            this.status(status);
+        }
         this._content = JSON.stringify(data);
         this.header('Content-Type', 'application/json');
         return this;
@@ -86,7 +89,10 @@ export class Response {
     /**
      * Set the response content as plain text or HTML.
      */
-    send(content: string | Buffer): this {
+    send(content: string | Buffer, status?: number): this {
+        if (status) {
+            this.status(status);
+        }
         this._content = content;
         if (typeof content === 'string' && !this._headers['Content-Type']) {
             this.header('Content-Type', content.startsWith('<') ? 'text/html' : 'text/plain');
@@ -147,5 +153,12 @@ export class Response {
 
         // 4. Send body and end
         this.res.end(this._content ?? '');
+    }
+
+    /**
+     * Get the underlying Node response.
+     */
+    getOriginalResponse(): ServerResponse {
+        return this.res;
     }
 }

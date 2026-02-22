@@ -164,4 +164,11 @@ export class Request {
         const body = typeof this._body === 'object' && this._body !== null ? this._body : {};
         return { ...query, ...body };
     }
+
+    /**
+     * Get the original incoming message.
+     */
+    getIncomingMessage(): IncomingMessage {
+        return this.req;
+    }
 }
