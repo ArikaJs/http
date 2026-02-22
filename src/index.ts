@@ -1,5 +1,8 @@
 export * from './Request';
 export * from './Response';
+export * from './HttpKernel';
+export * from './Router';
+export * from './Pipeline';
 export * from './Middleware';
 export * from './Middleware/BodyParserMiddleware';
 export * from './Middleware/CorsMiddleware';
@@ -7,3 +10,4 @@ export * from './Middleware/TrimStrings';
 export * from './Middleware/ConvertEmptyStringsToNull';
 export * from './Exceptions/HttpException';
 export * from './Contracts/Application';
+export * from './HttpServiceProvider';
