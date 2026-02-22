@@ -1,5 +1,11 @@
 # Arika HTTP
 
+<div align="center">
+
+![ArikaJS Logo](http://13.232.79.11:7800/down/oZ9NpyKtAQzK.png)
+
+</div>
+
 `@arikajs/http` is the **web engine** for the ArikaJS ecosystem.
 
 Arika HTTP provides a native, framework-controlled HTTP layer that sits directly on top of Node.js HTTP primitives. It handles the request lifecycle, routing, and middleware without relying on external frameworks like Express or Fastify.
