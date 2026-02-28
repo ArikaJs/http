@@ -89,7 +89,7 @@ export class Response {
     /**
      * Set the response content as plain text or HTML.
      */
-    send(content: string | Buffer, status?: number): this {
+    public send(content: string | Buffer, status?: number): this {
         if (status) {
             this.status(status);
         }
@@ -97,6 +97,16 @@ export class Response {
         if (typeof content === 'string' && !this._headers['Content-Type']) {
             this.header('Content-Type', content.startsWith('<') ? 'text/html' : 'text/plain');
         }
+        return this;
+    }
+
+    /**
+     * Redirect to a specific URL.
+     */
+    public redirect(url: string, status: number = 302): this {
+        this.status(status);
+        this.header('Location', url);
+        this._content = `Redirecting to ${url}`;
         return this;
     }
 

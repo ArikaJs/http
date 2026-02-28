@@ -10,6 +10,7 @@ export class Request {
     private _cookies: Record<string, string | undefined> | null = null;
     private _body: any = null;
     private _params: Record<string, string> = {};
+    public session: any;
 
     constructor(app: Application, req: IncomingMessage) {
         this.app = app;
@@ -17,6 +18,16 @@ export class Request {
 
         const fullUrl = `${this.baseUrl()}${req.url || '/'}`;
         this.searchParams = new URL(fullUrl).searchParams;
+
+        // Initialize a lightweight in-memory session store (fallback until full session middleware)
+        const store: Record<string, any> = {};
+        this.session = {
+            get(key: string) { return store[key] ?? null; },
+            put(key: string, value: any) { store[key] = value; },
+            forget(key: string) { delete store[key]; },
+            has(key: string) { return key in store; },
+            all() { return { ...store }; },
+        };
     }
 
     /**
@@ -163,6 +174,36 @@ export class Request {
         const query = Object.fromEntries(this.searchParams.entries());
         const body = typeof this._body === 'object' && this._body !== null ? this._body : {};
         return { ...query, ...body };
+    }
+
+    /**
+     * Get a subset of the input data.
+     */
+    only(keys: string[]): Record<string, any> {
+        const all = this.all();
+        const result: Record<string, any> = {};
+
+        keys.forEach(key => {
+            if (key in all) {
+                result[key] = all[key];
+            }
+        });
+
+        return result;
+    }
+
+    /**
+     * Get all input data except for a specified array of keys.
+     */
+    except(keys: string[]): Record<string, any> {
+        const all = this.all();
+        const result: Record<string, any> = { ...all };
+
+        keys.forEach(key => {
+            delete result[key];
+        });
+
+        return result;
     }
 
     /**
