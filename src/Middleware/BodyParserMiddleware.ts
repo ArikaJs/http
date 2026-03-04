@@ -32,16 +32,49 @@ export class BodyParserMiddleware implements Middleware {
      */
     private parseBody(request: Request): Promise<any> {
         return new Promise((resolve, reject) => {
-            let body = '';
+            const contentType = request.header('content-type') as string | undefined;
             const req = request.getRaw();
 
+            if (contentType?.includes('multipart/form-data')) {
+                try {
+                    const Busboy = require('busboy');
+                    const busboy = Busboy({ headers: request.headers() });
+                    const data: Record<string, any> = {};
+
+                    busboy.on('field', (name: string, value: any, info: any) => {
+                        data[name] = value;
+                    });
+
+                    busboy.on('file', (name: string, file: any, info: any) => {
+                        // For now we just consume the file stream to prevent hang
+                        file.resume();
+                    });
+
+                    busboy.on('close', () => {
+                        resolve(data);
+                    });
+
+                    busboy.on('finish', () => {
+                        resolve(data);
+                    });
+
+                    busboy.on('error', (err: Error) => {
+                        reject(err);
+                    });
+
+                    req.pipe(busboy);
+                } catch (e) {
+                    reject(e);
+                }
+                return;
+            }
+
+            let body = '';
             req.on('data', (chunk: Buffer) => {
                 body += chunk.toString();
             });
 
             req.on('end', () => {
-                const contentType = request.header('content-type') as string | undefined;
-
                 if (contentType?.includes('application/json')) {
                     try {
                         resolve(JSON.parse(body || '{}'));
